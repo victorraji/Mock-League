@@ -1,11 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 // var cors = require('cors')
+require('dotenv').config()
 const mongoose = require('mongoose')
-
-// const MongoClient = require('mongodb').MongoClient;
 const bodyParser = require('body-parser');
-// const db = require('./config/db');
 
  
 const app = express();
