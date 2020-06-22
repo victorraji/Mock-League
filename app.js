@@ -31,9 +31,9 @@ app.use((req, res, next) => {
     }
     next();
 });
-app.use('/teams', teamRoutes);
-app.use('/matches', matchRoutes);
-app.use('/users', userRoutes);
+app.use('/api/teams', teamRoutes);
+app.use('/api/matches', matchRoutes);
+app.use('/api/users', userRoutes);
 
 
 app.use((req, res, next) => {
