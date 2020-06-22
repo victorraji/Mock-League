@@ -113,24 +113,26 @@ exports.delete_team = (req, res, next) => {
 }
 exports.update_team = (req, res, next) => {
     const id = req.params.teamId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
+    // const updateOps = {};
+    // for (const ops of req.body) {
+    //     updateOps[ops.propName] = ops.value;
+    // }
+
     Team.update({
             _id: id
         }, {
-            $set:
+            $set:{
                 // name: req.body.newName,
-                // name: req.body.newManager
-                updateOps
+                name: req.body.name,
+                manager:req.body.manager
+            }
         })
         .exec()
         .then(result => {
             res.status(200).json({
                 message: "Team Updated Successfully",
                 createdTeam: {
-                    updateOps
+                    result
                 }
             });
 

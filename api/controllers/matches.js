@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 exports.get_all_matches= (req, res, next) => {
     Match.find()
-        .select('home_team away_team home_score away_score schedule _id')
+        .select('home_team away_team home_score away_score status schedule _id')
         .exec()
         .then(docs => {
             const response = {
@@ -18,6 +18,7 @@ exports.get_all_matches= (req, res, next) => {
                         home_score: doc.home_score,
                         away_score: doc.away_score,
                         schedule: doc.schedule,
+                        status:doc.status,
                         _id: doc._id,
                         request: {
                             type: 'GET',
@@ -58,7 +59,8 @@ exports.create_match = (req, res, next) => {
                     _id: result._id,
                     away_team: result.away_team,
                     away_score: result.away_score,
-                    schedule: result.schedule
+                    schedule: result.schedule,
+                    status:result.status
                 }
             });
         })
@@ -116,23 +118,28 @@ exports.delete_match =(req, res, next) => {
 }
 exports.update_match= (req, res, next) => {
     const id = req.params.matchId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
-    }
+    // const updateOps = {};
+    // for (const ops of req.body) {
+    //     updateOps[ops.propName] = ops.value;
+    // }
     Match.update({
             _id: id
         }, {
-            $set:
-                updateOps
+            $set:{
+                home_score:req.body.home_score,
+                away_score:req.body.away_score,
+                status:'result'
+            }
+                // updateOps
         })
+        .select('home_team away_team home_score away_score status schedule _id')
         .exec()
         .then(result => {
-            console.log('From database' + result);
+            console.log(result);
             res.status(200).json({
                 message: "Match results were Updated Successfully",
                 updatedMatchResults: {
-                    updateOps
+                    result
                 },
                 request: {
                     type: 'GET',

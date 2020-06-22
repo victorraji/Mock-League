@@ -26,5 +26,9 @@ const matchSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    status:{
+        type:String,
+        default:'fixture'
+    }
 });
 module.exports = mongoose.model('Match', matchSchema)

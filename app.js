@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+// var cors = require('cors')
 const mongoose = require('mongoose')
 
 // const MongoClient = require('mongodb').MongoClient;
@@ -8,6 +9,7 @@ const bodyParser = require('body-parser');
 
  
 const app = express();
+// app.use(cors('*'))
 const teamRoutes = require('./api/routes/teams');
 const matchRoutes = require('./api/routes/matches');
 const userRoutes = require('./api/routes/users');

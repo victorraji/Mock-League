@@ -123,7 +123,9 @@ router.post('/login', (req, res, next) => {
                     )
                     return res.status(200).json({
                         message: "Auth Successful, Logged in Admin user",
-                        token:token
+                        token:token,
+                        first_name: user[0].first_name,
+                        last_name:user[0].last_name
                     });
                 }
                 res.status(401).json({
