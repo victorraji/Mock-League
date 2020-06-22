@@ -4,8 +4,8 @@
   "description": "a mock league for teams",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [
     "A",
@@ -15,14 +15,14 @@
   "author": "victor raji",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.19",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "bcrypt": "^3.0.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
