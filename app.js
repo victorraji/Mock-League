@@ -35,10 +35,10 @@ app.use('/api/teams', teamRoutes);
 app.use('/api/matches', matchRoutes);
 app.use('/api/users', userRoutes);
 
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static(__dirname+'/public/'));
-    app.get(/.*/, (req,res) => res.sendFile(__dirname+ '/public/index.html'));
-}
+// if(process.env.NODE_ENV === 'production'){
+//     app.use(express.static(__dirname+'/public/'));
+//     app.get(/.*/, (req,res) => res.sendFile(__dirname+ '/public/index.html'));
+// }
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
