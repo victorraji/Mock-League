@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.7185df0e6eebf8e73b1ef1cfbb0acb49.js"
+  "/precache-manifest.13026a14ba85cc7aec646db979ab5ca8.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mock-league"});
