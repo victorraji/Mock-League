@@ -3,15 +3,34 @@ const Match = require('../models/matches')
 const Team = require('../models/teams')
 const mongoose = require('mongoose');
 
-
 exports.get_all_matches= (req, res, next) => {
+    const page = parseInt(req.query.page)
+    const limit = parseInt(req.query.limit)
+
+    const startIndex = (page - 1) * limit
+    const endIndex = page * limit
     Match.find()
         .select('home_team away_team home_score away_score status schedule _id')
         .exec()
         .then(docs => {
+            const pagination = {};
+            if (endIndex < docs.length) {
+                pagination.next = {
+                    page: page + 1,
+                    limit: limit
+                }
+            }
+            if (startIndex > 0) {
+                pagination.previous = {
+                    page: page - 1,
+                    limit: limit
+                }
+            }
+            matches = docs.slice(startIndex, endIndex)
             const response = {
+                pagination: pagination,
                 count: docs.length,
-                match: docs.map(doc => {
+                match: matches.map(doc => {
                     return {
                         home_team: doc.home_team,
                         away_team: doc.away_team,
@@ -20,11 +39,6 @@ exports.get_all_matches= (req, res, next) => {
                         schedule: doc.schedule,
                         status:doc.status,
                         _id: doc._id,
-                        request: {
-                            type: 'GET',
-                            message:'click to see available matches',
-                            url: 'http://localhost:3000/matches/' + doc._id
-                        }
                     }
                 })
             }
